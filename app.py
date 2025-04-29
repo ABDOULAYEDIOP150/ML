@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix, roc_curve, auc
 from sklearn.ensemble import RandomForestClassifier
@@ -13,32 +13,7 @@ def main():
     st.title("Application de Machine Learning pour la Prédiction du Diabète")
     st.subheader("Auteur: Diop Abdoulaye")
 
-    # Fonction d'affichage de la matrice de confusion
-    def plot_confusion_matrix(y_true, y_pred):
-        cm = confusion_matrix(y_true, y_pred)
-        fig, ax = plt.subplots()
-        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax)
-        ax.set_xlabel('Prédit')
-        ax.set_ylabel('Réel')
-        ax.set_title('Matrice de confusion')
-        st.write("Matrice de confusion générée.")
-        st.pyplot(fig)
-
-    # Fonction d'affichage de la courbe ROC
-    def plot_roc_curve(y_true, y_prob):
-        fpr, tpr, thresholds = roc_curve(y_true, y_prob)
-        roc_auc = auc(fpr, tpr)
-
-        fig, ax = plt.subplots()
-        ax.plot(fpr, tpr, color='darkorange', lw=2, label='AUC = %0.2f' % roc_auc)
-        ax.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-        ax.set_xlabel('Taux de faux positifs (FPR)')
-        ax.set_ylabel('Taux de vrais positifs (TPR)')
-        ax.set_title('Courbe ROC')
-        ax.legend(loc="lower right")
-        st.write("Courbe ROC générée.")
-        st.pyplot(fig)
-
+    
     # Fonction d'importation des données
     @st.cache_data
     def load_data():
@@ -102,17 +77,6 @@ def main():
 
         st.write(f"Probabilité de diabète : {prediction_proba[0]:.2f}")
 
-        # Optionnel: afficher la matrice de confusion et la courbe ROC
-        if st.checkbox("Afficher la matrice de confusion"):
-            st.write("Affichage de la matrice de confusion...")
-            y_test_pred = model.predict(X_test)
-            plot_confusion_matrix(y_test, y_test_pred)
-
-        if st.checkbox("Afficher la courbe ROC"):
-            st.write("Affichage de la courbe ROC...")
-            y_test_prob = model.predict_proba(X_test)[:, 1]  # Probabilités pour la courbe ROC
-            plot_roc_curve(y_test, y_test_prob)
-
+        
 if __name__ == "__main__":
     main()
-
