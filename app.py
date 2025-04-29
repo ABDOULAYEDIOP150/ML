@@ -13,12 +13,11 @@ def main():
     st.title("Application de Machine Learning pour la Prédiction du Diabète")
     st.subheader("Auteur: Diop Abdoulaye")
 
-    
-    # Fonction d'importation des données
+     # Fonction d'importation des données
     @st.cache_data
     def load_data():
-    data = pd.read_csv("diabetes.csv")
-    return data
+        data = pd.read_csv("diabetes.csv")
+        return data
 
     # Chargement des données
     df = load_data()
