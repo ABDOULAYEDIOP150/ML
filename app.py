@@ -17,8 +17,8 @@ def main():
     # Fonction d'importation des données
     @st.cache_data
     def load_data():
-        data = pd.read_csv(r"C:\Users\Abdoulaye Diop\Desktop\Projet_Data_Scientist_AtoZ\data\diabetes.csv")
-        return data
+    data = pd.read_csv("diabetes.csv")
+    return data
 
     # Chargement des données
     df = load_data()
